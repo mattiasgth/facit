@@ -1,0 +1,17 @@
+a,
+a:visited,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #125699;
+}
+
+.project-card {
+  display:flex;
+  margin-right: 25px;
+  margin-bottom: 10px;
+  flex-direction: column;
+}

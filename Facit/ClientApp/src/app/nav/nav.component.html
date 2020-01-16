@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>FACIT</h1>
+    <span class="spacer"></span>
+    <button mat-icon-button>
+      <mat-icon [matMenuTriggerFor]="auth">menu</mat-icon>
+    </button>
+    <mat-menu #auth="matMenu">
+      <a mat-menu-item [routerLink]="'/home'">
+        <mat-icon>home</mat-icon>
+        <span>Start</span>
+      </a>
+      <a mat-menu-item [routerLink]="'/transactions'">
+        <mat-icon>local_grocery_store</mat-icon>
+        <span>Transaktioner</span>
+      </a>
+      <a mat-menu-item [routerLink]="'/projects'">
+        <mat-icon>card_travel</mat-icon>
+        <span>Projekt</span>
+      </a>
+      <a mat-menu-item [routerLink]="'/people'">
+        <mat-icon>face</mat-icon>
+        <span>Personer</span>
+      </a>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logga ut</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,22 @@
+a,
+a:visited,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #125699;
+}
+
+
+.transaction-item:hover .material-icons path {
+  fill: rgb(105, 103, 103);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 17px rgba(black, 0.35);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

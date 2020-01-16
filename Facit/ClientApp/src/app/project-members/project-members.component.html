@@ -1,0 +1,8 @@
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let item of members">
+    <mat-icon mat-list-icon>person</mat-icon><h4 mat-line>{{item.firstName}}</h4>
+    <p mat-line *ngIf="balances">
+      {{balances[item.id]}}
+    </p>
+  </mat-list-item>
+</mat-list>

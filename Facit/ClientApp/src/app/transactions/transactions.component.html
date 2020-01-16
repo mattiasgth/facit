@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h4>Transaktioner</h4>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-transactions-list [projectId]="1">
+    </app-transactions-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="onNewTransactionClick()">Nytt</button>
+  </mat-card-actions>
+</mat-card>

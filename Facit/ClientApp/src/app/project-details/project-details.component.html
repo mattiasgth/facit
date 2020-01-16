@@ -1,0 +1,21 @@
+<div class="project-details-wrapper">
+  <mat-card *ngIf="project">
+    <mat-card-header>
+      <mat-card-title>
+        <h4>{{project.description}}</h4>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Skapad av {{project.createdBy.firstName}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h4>Transaktioner</h4>
+      <app-transactions-list [projectId]="project.id"> </app-transactions-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="onBackClicked()"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-raised-button (click)="onNewTransactionClicked()"><mat-icon>add_shopping_cart</mat-icon></button>
+      <button mat-raised-button color="secondary">Stäng</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

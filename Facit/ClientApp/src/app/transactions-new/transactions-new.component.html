@@ -1,0 +1,77 @@
+<div class="transactions-new-wrapper">
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h1>Ny transaktion</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+          <div fxFlex.gt-sm="50%">
+            <mat-card>
+              <mat-card-content>
+                <ul>
+                  <li>
+                    <div fxLayout="column">
+                      <div class="form-inline">
+                        <mat-form-field>
+                          <input matInput formControlName="description" placeholder="Beskrivning">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="picker" placeholder="Datum" formControlName="when">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-inline">
+                        <mat-form-field>
+                          <input readonly="readonly" matInput value="{{subTotal}}" placeholder="Belopp">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <mat-label>Valuta</mat-label>
+                          <mat-select formControlName="currencyLocalId">
+                            <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+                              {{currency.code}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div fxFlex.gt-sm="50%">
+            <mat-card>
+              <mat-card-content>
+                <div formArrayName="participants"
+                     *ngFor="let item of transactionForm.get('participants').controls; let i = index;">
+                  <div [formGroupName]="i" class="form-inline">
+                    <div class="halfway"><mat-icon>person</mat-icon>  {{item.controls.name.value}}</div>
+                    <div class="form-inline">
+                      <mat-form-field>
+                        <input matInput placeholder="Betalt" formControlName="credit">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Förbrukat" formControlName="debit">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button type="button" (click)="onClickedShareEven()"><mat-icon>vertical_align_center</mat-icon></button>
+                <button type="button" mat-raised-button (click)="onClickedAddParticipant()"><mat-icon>person_add</mat-icon></button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" [disabled]="!transactionForm.valid"><mat-icon>save</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

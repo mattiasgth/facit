@@ -1,0 +1,45 @@
+.display-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+.display-rows {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+  .form-inline .mat-form-field {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+.form-inline .mat-form-field:nth-child(1) {
+  margin-right: 10px;
+}
+
+.red-bkg {
+  background-color: red;
+  min-height: 100px;
+}
+
+.blu-bkg {
+  background-color: blue;
+  min-height: 100px;
+}
+
+.halfway{
+  min-width: 33%;
+}
+
+.transactions-new-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

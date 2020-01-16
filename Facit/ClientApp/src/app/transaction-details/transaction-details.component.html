@@ -1,0 +1,29 @@
+<div class="transaction-details-wrapper">
+  <mat-card *ngIf="transaction">
+    <mat-card-title>
+       {{transaction.when | date}} {{transaction.description}}
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="currencyLocal && creator">
+      Valuta: {{currencyLocal.code}}<br />
+      Skapad av: {{creator.firstName}} {{creator.lastName}}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-list *ngIf="transaction.participants && currencyLocal">
+        <mat-list-item role="listitem" *ngFor="let item of transaction.participants">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <h4 mat-line>{{item.personName}}</h4>
+          <p mat-line>
+            Betalt: {{item.credit}}<br />
+            Förbrukat: {{item.debit}}
+          </p>
+          <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="onBackClick()"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-raised-button (click)="onEditClick()"><mat-icon>edit</mat-icon></button>
+      <button mat-raised-button (click)="onDeleteClick()"><mat-icon>delete_forever</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>

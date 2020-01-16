@@ -1,0 +1,15 @@
+.people-list{
+  width:100%;
+}
+
+.name-cell{
+  width:50%;
+}
+
+.credit-cell{
+  width:25%;
+}
+
+.debit-cell{
+  width:25%;
+}
