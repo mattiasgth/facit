@@ -13,10 +13,12 @@ export class ProjectMembersComponent implements OnInit {
     @Input() projectId: number;
     members: Person[];
     balances = new Array();
+    public loading: boolean;
 
     constructor(private service: ProjectsService) { }
 
     ngOnInit() {
+        this.loading = true;
         this.service.getMembers(this.projectId)
             .subscribe(rslt => {
                 this.members = rslt;
@@ -24,9 +26,13 @@ export class ProjectMembersComponent implements OnInit {
                     .subscribe(rslt => {
                         rslt.forEach((i, idx) => {
                             this.balances[i.personId] = i.balance;
-                        })
+                        });
+                        this.loading = false;
                     });
-            });
+            },
+                err => {
+                    this.loading = false;
+                });
     }
 
     balanceByPersonId(personId: number) {

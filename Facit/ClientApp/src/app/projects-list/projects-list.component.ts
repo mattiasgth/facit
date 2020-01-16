@@ -16,6 +16,8 @@ export class ProjectsListComponent implements OnInit {
     public displayedColumns = ["id", "description", "createdWhen"];
     public dataSource: ProjectsDatasource;
     public projects: Observable<Project[]>;
+    public loading: boolean;
+
 
     constructor(
         private service: ProjectsService,
@@ -25,10 +27,16 @@ export class ProjectsListComponent implements OnInit {
     ngOnInit() {
         this.dataSource = new ProjectsDatasource(this.service, this.snackBar);
         this.dataSource.loadProjects();
+        this.loading = true;
         this.service.getData()
             .subscribe(rslt => {
                 this.projects = rslt;
-            });
+                this.loading = false;
+            },
+                err => {
+                    console.log(err);
+                    this.loading = false;
+                });
     }
 
     onDeleteProject(projectId: string) {

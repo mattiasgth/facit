@@ -6,6 +6,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { TransactionsNewComponent } from './transactions-new/transactions-new.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
         path: 'transaction/:id',
         component: TransactionDetailsComponent
+    },
+    {
+        path: 'person/:id',
+        component: PersonDetailsComponent
     },
     {
         path: 'transactions/new',

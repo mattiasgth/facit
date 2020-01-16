@@ -1,9 +1,12 @@
-<div style="display:flex; flex-direction: column;">
-  <mat-list role="list">
-    <mat-list-item class="transaction-item" *ngFor="let item of transactions">
-      <a [routerLink]="['/transaction', item.id]">
-        <mat-icon>local_grocery_store</mat-icon> <span class="truncate">{{item.when | date}} {{item.description}}</span>
-      </a>
-    </mat-list-item>
-  </mat-list>
-</div>
+<app-loading *ngIf="loading"></app-loading>
+<ng-template [ngIf]="!loading">
+  <div style="display:flex; flex-direction: column;">
+    <mat-list role="list">
+      <mat-list-item class="transaction-item" *ngFor="let item of transactions">
+        <a [routerLink]="['/transaction', item.id]">
+          <mat-icon>local_grocery_store</mat-icon> <span class="truncate">{{item.when | date}} {{item.description}}</span>
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</ng-template>

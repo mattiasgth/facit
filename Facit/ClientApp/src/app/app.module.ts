@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,8 +28,10 @@ import { TransactionDialogComponent } from './transaction-dialog/transaction-dia
 import { TransactionsNewComponent } from './transactions-new/transactions-new.component';
 import { TransactionsAddParticipantComponent } from './transactions-add-participant/transactions-add-participant.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
+import { LoadingComponent } from './core/loading.component';
 
-@NgModule({
+@NgModule({ 
     declarations: [
         AppComponent,
         ProjectsListComponent,
@@ -44,7 +46,9 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
         TransactionDialogComponent,
         TransactionsNewComponent,
         TransactionsAddParticipantComponent,
-        TransactionDetailsComponent
+        TransactionDetailsComponent,
+        PersonDetailsComponent,
+        LoadingComponent
     ],
     imports: [
         BrowserModule,
@@ -81,7 +85,9 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
         TransactionDialogComponent,
         TransactionsAddParticipantComponent
     ],
-    providers: [],
+    providers: [
+        Title
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

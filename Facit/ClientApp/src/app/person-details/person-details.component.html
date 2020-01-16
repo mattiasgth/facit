@@ -1,0 +1,18 @@
+<div class="person-details-wrapper">
+  <mat-card *ngIf="person">
+    <mat-card-title>
+      {{person.fullName}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      Subtitle
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>Interesting content goes here</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="onBackClick()"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-raised-button (click)="onDeleteClick()"><mat-icon>delete_forever</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
