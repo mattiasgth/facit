@@ -12,7 +12,12 @@ import { ProjectsComponent } from './projects/projects.component';
 import { HomeComponent } from './home/home.component';
 
 import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatSnackBarModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, NativeDateModule, MatNativeDateModule, MatGridListModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule, MatRadioButton, MatRadioModule } from '@angular/material';
+import {
+    MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatSnackBarModule,
+    MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
+    NativeDateModule, MatNativeDateModule, MatGridListModule, MatSelectModule,
+    MatCheckboxModule, MatSlideToggleModule, MatRadioButton, MatRadioModule
+} from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';

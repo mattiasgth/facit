@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectsDatasource } from '../projects-datasource';
 import { ProjectsService } from '../projects.service';
 import { MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Project } from '../../models/project';
 import { Router } from '@angular/router';
 
@@ -13,8 +12,6 @@ import { Router } from '@angular/router';
 })
 export class ProjectsListComponent implements OnInit {
 
-    public displayedColumns = ["id", "description", "createdWhen"];
-    public dataSource: ProjectsDatasource;
     public projects: Observable<Project[]>;
     public loading: boolean;
 
@@ -25,8 +22,6 @@ export class ProjectsListComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.dataSource = new ProjectsDatasource(this.service, this.snackBar);
-        this.dataSource.loadProjects();
         this.loading = true;
         this.service.getData()
             .subscribe(rslt => {

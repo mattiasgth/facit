@@ -6,6 +6,9 @@ import { CollectionViewer } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
+
+// this class is not used
+
 export class ProjectsDatasource implements DataSource<Project> {
 
     private projectsSubject = new BehaviorSubject<Project[]>([]);

@@ -4,3 +4,22 @@
     padding-top: 50px;
   }
 }
+
+.facit-content-wrapper-old {
+  height: 100vh;
+  width:600px;
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+  align-items: center;
+}
+
+.facit-content-wrapper {
+  height: 100vh;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+  align-items: center;
+}
+

@@ -16,7 +16,7 @@ import { PeopleService } from '../people.service';
   styleUrls: ['./transaction-details.component.css']
 })
 export class TransactionDetailsComponent implements OnInit {
-
+    public loading: boolean;
     private transactionId: string;
     private transaction$: Observable<TransactionDTO>;
     public transaction: TransactionDTO;
@@ -29,6 +29,7 @@ export class TransactionDetailsComponent implements OnInit {
         private location: Location) { }
 
     ngOnInit() {
+        this.loading = true;
         this.transaction$ = this.route.paramMap.pipe(
             switchMap((params: ParamMap) => {
                 this.transactionId = params.get('id');
@@ -40,7 +41,12 @@ export class TransactionDetailsComponent implements OnInit {
             this.peopleService.getPersonById(this.transaction.createdById)
                 .subscribe(rslt => this.creator = rslt);
             this.service.getCurrency(this.transaction.currencyLocalId.toString())
-                .subscribe(rslt => this.currencyLocal = rslt);
+                .subscribe(rslt => {
+                    this.currencyLocal = rslt; this.loading = false;
+                },
+                    err => {
+                        this.loading = false;
+                    });
         });
     }
 

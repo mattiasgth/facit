@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Facit.Models;
+using Models.ViewModels;
+using AutoMapper;
 
 namespace Facit.Controllers
 {
@@ -14,9 +16,11 @@ namespace Facit.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly FacitContext _context;
+        private readonly IMapper _mapper;
 
-        public PeopleController(FacitContext context)
+        public PeopleController(FacitContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
@@ -38,7 +42,7 @@ namespace Facit.Controllers
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        public async Task<ActionResult<PersonDetailsDTO>> GetPerson(int id)
         {
             var person = await _context.Person.FindAsync(id);
 
@@ -47,7 +51,26 @@ namespace Facit.Controllers
                 return NotFound();
             }
 
-            return person;
+            var rslt = _mapper.Map<PersonDetailsDTO>(person);
+
+            rslt.Balances = await _context
+                .TransactionItem
+                .Include(x => x.Who)
+                .Include(x => x.Transaction)
+                .ThenInclude(y => y.Project)
+                .ThenInclude(z => z.BaseCurrency)
+                .Where(x => x.Who.Id == id)
+                .GroupBy(x => x.Transaction.Project)
+                .Select(x => new PersonDetailsDTO.PersonDetailsBalancesDTO()
+                {
+                    ProjectDescription = x.First().Transaction.Project.Description,
+                    ProjectId = x.First().Transaction.Project.Id,
+                    Balance = x.Sum(ti => ti.Amount),
+                    CurrencyCode = x.First().Transaction.Project.BaseCurrency.Code
+                })
+                .ToListAsync();
+
+            return rslt;
         }
 
         // PUT: api/People/5

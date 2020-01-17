@@ -12,6 +12,8 @@ import { switchMap } from 'rxjs/operators';
     styleUrls: ['./person-details.component.css']
 })
 export class PersonDetailsComponent implements OnInit {
+
+    public loading: boolean;
     public personId: string;
     private person$: Observable<Person>;
     public person: Person;
@@ -21,6 +23,7 @@ export class PersonDetailsComponent implements OnInit {
         private location: Location) { }
 
     ngOnInit() {
+        this.loading = true;
         this.person$ = this.route.paramMap.pipe(
             switchMap((params: ParamMap) => {
                 this.personId = params.get('id');
@@ -28,8 +31,12 @@ export class PersonDetailsComponent implements OnInit {
             })
         );
         this.person$.subscribe((rslt: Person) => {
+            this.loading = false;
             this.person = rslt;
-        });
+        },
+            err => {
+                this.loading = false;
+            });
     }
 
     onBackClick() {

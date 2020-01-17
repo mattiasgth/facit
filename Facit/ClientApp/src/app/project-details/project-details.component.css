@@ -1,6 +1,4 @@
-.project-details-wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+:host {
+  width: 100%;
 }

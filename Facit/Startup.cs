@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Facit.Models;
+using AutoMapper;
+using System.Reflection;
 
 namespace Facit
 {
@@ -37,6 +39,9 @@ namespace Facit
 
             services.AddDbContext<FacitContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("FacitContext")));
+
+            var modelAssembly = Assembly.GetAssembly(typeof(Person));
+            services.AddAutoMapper(modelAssembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

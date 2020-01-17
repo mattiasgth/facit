@@ -7,8 +7,8 @@
     </mat-card-header>
     <mat-card-content>
       <div fxLayout="row">
-        <app-project-transactions [projectId]="item.id"></app-project-transactions>
-        <app-project-members [projectId]="item.id" class="project-item"></app-project-members>
+        <app-project-transactions fxFlex="60%" [transactions]="item.transactions"></app-project-transactions>
+        <app-project-members fxFlex="40%" [members]="item.members"></app-project-members>
       </div>
     </mat-card-content>
     <mat-card-actions>

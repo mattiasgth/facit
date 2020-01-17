@@ -1,18 +1,24 @@
-<div class="person-details-wrapper">
-  <mat-card *ngIf="person">
+<mat-card>
+  <app-loading *ngIf="loading"></app-loading>
+  <ng-template [ngIf]="!loading && person">
     <mat-card-title>
       {{person.fullName}}
     </mat-card-title>
     <mat-card-subtitle>
-      Subtitle
+      {{person.email1 || person.email2}}
     </mat-card-subtitle>
     <mat-card-content>
-      <p>Interesting content goes here</p>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let item of person.balances">
+          <a mat-line [routerLink]="['/project', item.projectId]"><mat-icon mat-list-icon>card_travel</mat-icon> {{item.projectDescription}}</a>
+          <p mat-line>{{item.currencyCode}} {{item.balance}}</p>
+          <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+        </mat-list-item>
+      </mat-list>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="onBackClick()"><mat-icon>arrow_back</mat-icon></button>
-      <button mat-raised-button (click)="onDeleteClick()"><mat-icon>delete_forever</mat-icon></button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-
+  </ng-template>
+  <mat-card-actions>
+    <button mat-raised-button (click)="onBackClick()"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-raised-button (click)="onDeleteClick()"><mat-icon>delete_forever</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

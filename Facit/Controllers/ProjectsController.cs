@@ -24,14 +24,58 @@ namespace Facit.Controllers
 
         // GET: api/Projects
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjects(string filter = null, 
+        public async Task<ActionResult<IEnumerable<ProjectListDTO>>> GetProjects(string filter = null,
             string sortField = "id", string sortDirection = "asc", int pageNumber = 0, int pageSize = 30)
         {
-            return await _context.Project
+            var rslt = await _context.Project
                 .Include(x => x.CreatedBy)
                 .Include(x => x.BaseCurrency)
                 .OrderBy(x => x.CreatedWhen)
+                .Select(x => new ProjectListDTO()
+                {
+                    CreatedById = x.CreatedBy.Id,
+                    CreatedByName = x.CreatedBy.FullName,
+                    CreatedWhen = x.CreatedWhen,
+                    CurrencyCode = x.BaseCurrency.Code,
+                    Description = x.Description,
+                    Id = x.Id
+                })
                 .ToListAsync();
+
+            var trans = await _context.Transaction
+                    .Include(x => x.Project)
+                    .ToListAsync();
+            var transactionItems = await _context.TransactionItem
+                    .Include(x => x.Who)
+                    .Include(x => x.Transaction)
+                    .ThenInclude(y => y.Project)
+                    .ToListAsync();
+
+
+
+            foreach (var p in rslt)
+            {
+                p.Transactions = trans
+                    .Where(x => x.Project.Id == p.Id)
+                    .Select(x => new ProjectListDTO.Transaction()
+                    {
+                        Description = x.Description,
+                        Id = x.Id,
+                        When = x.When
+                    });
+
+                p.Members = transactionItems
+                    .Where(x => x.Transaction.Project.Id == p.Id)
+                    .GroupBy(x => new Tuple<int, int>(x.Who.Id, x.Transaction.Project.Id))
+                    .Select(x => new ProjectListDTO.Member()
+                    {
+                        PersonId = x.First().Who.Id,
+                        FirstName = x.First().Who.FirstName,
+                        LastName = x.First().Who.LastName,
+                        Balance = x.Sum(ti => ti.Amount)
+                    });
+            }
+            return rslt;
         }
 
         // GET: api/Projects/5
@@ -57,7 +101,7 @@ namespace Facit.Controllers
                 .ThenInclude(y => y.Who)
                 .ToListAsync();
 
-            foreach(var t in transactions.Where(x => x.Project.Id == id))
+            foreach (var t in transactions.Where(x => x.Project.Id == id))
             {
                 foreach (var ti in t.TransactionItems)
                 {
@@ -72,7 +116,7 @@ namespace Facit.Controllers
                         };
                         // throw new DataMisalignedException("Need membership for each transaction item");
                     }
-                    if(membership.Balance == null)
+                    if (membership.Balance == null)
                     {
                         membership.Balance = 0;
                     }
@@ -113,7 +157,7 @@ namespace Facit.Controllers
                 {
                     PersonId = x.First().Who.Id,
                     ProjectId = x.Key.Item2,
-                    Balance = x.Sum(ti => ti.Amount)                    
+                    Balance = x.Sum(ti => ti.Amount)
                 })
                 .ToListAsync();
             return balances;
@@ -135,7 +179,7 @@ namespace Facit.Controllers
         [HttpPut("{id}/members/{personId}")]
         public async Task<IActionResult> PutProjectMembers(int id, int personId)
         {
-            if(!ProjectExists(id))
+            if (!ProjectExists(id))
             {
                 return NotFound();
             }
@@ -146,7 +190,7 @@ namespace Facit.Controllers
             var person = _context.Person
                 .Where(x => x.Id == personId)
                 .SingleOrDefault();
-            if(person == null)
+            if (person == null)
             {
                 return NotFound("No such person");
             }
@@ -196,13 +240,13 @@ namespace Facit.Controllers
         {
             var project = new Project();
             project.CreatedBy = _context.Person.Find(vm.CreatedById);
-            if(project.CreatedBy == null)
+            if (project.CreatedBy == null)
             {
                 return BadRequest("CreatedById: no such user");
             }
             project.CreatedWhen = DateTime.UtcNow;
             project.BaseCurrency = _context.Currency.Find(vm.BaseCurrencyId);
-            if(project.BaseCurrency == null) 
+            if (project.BaseCurrency == null)
             {
                 return BadRequest("BaseCurrencyId: no such currency");
             }

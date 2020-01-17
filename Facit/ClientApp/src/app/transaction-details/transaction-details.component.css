@@ -9,9 +9,13 @@ a:hover {
   color: #125699;
 }
 
-.transaction-details-wrapper {
+.transaction-details-wrapper-x {
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+:host {
+  width: 100%;
 }

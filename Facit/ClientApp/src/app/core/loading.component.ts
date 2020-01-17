@@ -18,7 +18,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
 
-    public loadingImageUrl = require("../../assets/loading.svg");
+    public loadingImageUrl = "../../assets/loading.svg";
     constructor() { }
 
     ngOnInit() {
