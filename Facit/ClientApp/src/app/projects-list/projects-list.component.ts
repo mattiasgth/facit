@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Observable, of } from 'rxjs';
 import { Project } from '../../models/project';
 import { Router } from '@angular/router';
+import { ProjectListDTO } from '../../models/project-list-dto';
 
 @Component({
     selector: 'app-projects-list',
@@ -12,9 +13,8 @@ import { Router } from '@angular/router';
 })
 export class ProjectsListComponent implements OnInit {
 
-    public projects: Observable<Project[]>;
+    public projects: ProjectListDTO[];
     public loading: boolean;
-
 
     constructor(
         private service: ProjectsService,

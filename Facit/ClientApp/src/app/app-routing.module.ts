@@ -7,6 +7,12 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
 import { TransactionsNewComponent } from './transactions-new/transactions-new.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './core/auth.guard';
+import { PeopleComponent } from './people/people.component';
+import { PeopleNewComponent } from './people-new/people-new.component';
+import { UsersNewComponent } from './users-new/users-new.component';
+import { ProjectsNewComponent } from './projects-new/projects-new.component';
 
 
 const routes: Routes = [
@@ -17,27 +23,57 @@ const routes: Routes = [
     },
     {
         path: 'projects',
-        component: ProjectsComponent
+        component: ProjectsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'projects/new',
+        component: ProjectsNewComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'project/:id',
-        component: ProjectDetailsComponent
+        component: ProjectDetailsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'transactions',
-        component: TransactionsComponent
+        component: TransactionsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'transaction/:id',
-        component: TransactionDetailsComponent
+        component: TransactionDetailsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'people',
+        component: PeopleComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'people/new',
+        component: PeopleNewComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'person/:id',
-        component: PersonDetailsComponent
+        component: PersonDetailsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'transactions/new',
-        component: TransactionsNewComponent
+        component: TransactionsNewComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'users/new',
+        component: UsersNewComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     },
     {
         path: 'home',

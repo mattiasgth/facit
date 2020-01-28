@@ -5,6 +5,10 @@ import { Person } from '../models/person';
 import { Transaction } from '../models/transaction';
 import { Project } from '../models/project';
 import { Balance } from '../models/balance';
+import { environment } from '../environments/environment';
+import { Currency } from '../models/currency';
+import { ProjectNewDTO } from '../models/project-new';
+import { ProjectListDTO } from '../models/project-list-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +18,18 @@ export class ProjectsService {
     constructor(private client: HttpClient) { }
 
     getProject(id: string): Observable<Project> {
-        return this.client.get<Project>('api/projects/' + id);
+        return this.client.get<Project>(`${environment.apiUrl}/projects/${id}`);
     }
 
     deleteProject(id: string): Observable<any> {
-        return this.client.delete<any>('api/projects/' + id);
+        return this.client.delete<any>(`${environment.apiUrl}/projects/${id}`);
     }
 
     getData(filter: string = '', sortField: string = 'id', sortDirection: string = 'asc',
         pageIndex: number = 0, pageSize: number = 30)
-    : Observable<any>
+    : Observable<ProjectListDTO[]>
     {
-        return this.client.get<any>('api/projects', {
+        return this.client.get<ProjectListDTO[]>(`${environment.apiUrl}/projects`, {
             params: new HttpParams()
                 .set('filter', filter)
                 .set('sortField', sortField)
@@ -36,14 +40,21 @@ export class ProjectsService {
     }
 
     getMembers(projectId: number): Observable<Person[]> {
-        return this.client.get<Person[]>('api/projects/' + projectId + '/members');
+        return this.client.get<Person[]>(`${environment.apiUrl}/projects/${projectId}/members`);
     }
 
     getTransactionsByProjectId(projectId: number): Observable<Transaction[]> {
-        return this.client.get<Transaction[]>('api/projects/' + projectId + '/transactions');
+        return this.client.get<Transaction[]>(`${environment.apiUrl}/projects/${projectId}/transactions`);
     }
 
     getBalancesByProjectId(projectId: number): Observable<Balance[]> {
-        return this.client.get<Balance[]>('api/projects/' + projectId + '/balances');
+        return this.client.get<Balance[]>(`${environment.apiUrl}/projects/${projectId}/balances`);
+    }
+
+    getCurrencies(): Observable<Currency[]> {
+        return this.client.get<Currency[]>('api/currencies');
+    }
+    addProject(project: ProjectNewDTO) {
+        return this.client.post<Project>('api/projects', project);
     }
 }

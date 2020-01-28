@@ -20,3 +20,7 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.mat-list-item {
+  height: auto !important;
+}

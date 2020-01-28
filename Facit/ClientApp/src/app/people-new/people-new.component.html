@@ -1,0 +1,48 @@
+<mat-card>
+  <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>Lägg till en kompis</h1>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Om den här personen redan finns med i systemet, räcker det med att skriva en e-postadress.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column">
+        <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+          <mat-form-field fxFlex>
+            <input matInput formControlName="firstName" placeholder="Förnamn">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput formControlName="lastName" placeholder="Efternamn">
+          </mat-form-field>
+        </div>
+        <mat-form-field fxFlex>
+          <input matInput [matDatepicker]="picker" placeholder="Födelsedatum" formControlName="birthDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+          <mat-form-field fxFlex>
+            <input matInput formControlName="email1" placeholder="E-post">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput formControlName="email2" placeholder="Alt. e-post">
+          </mat-form-field>
+        </div>
+        <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+          <mat-form-field fxFlex>
+            <input matInput formControlName="phone1" placeholder="Telefon">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput formControlName="phone2" placeholder="Alt. telefon">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit" [disabled]="!personForm.valid"><mat-icon>save</mat-icon></button>
+    </mat-card-actions>
+  </form>
+</mat-card>

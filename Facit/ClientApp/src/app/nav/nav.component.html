@@ -12,7 +12,7 @@
       </a>
       <a mat-menu-item [routerLink]="'/transactions'">
         <mat-icon>local_grocery_store</mat-icon>
-        <span>Transaktioner</span>
+        <span>Händelser</span>
       </a>
       <a mat-menu-item [routerLink]="'/projects'">
         <mat-icon>card_travel</mat-icon>
@@ -20,11 +20,15 @@
       </a>
       <a mat-menu-item [routerLink]="'/people'">
         <mat-icon>face</mat-icon>
-        <span>Personer</span>
+        <span>Mina kompisar</span>
       </a>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="onClickedLogout()" *ngIf="isLoggedIn">
         <mat-icon>exit_to_app</mat-icon>
         <span>Logga ut</span>
+      </button>
+      <button mat-menu-item [routerLink]="'/login'" *ngIf="!isLoggedIn">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logga in</span>
       </button>
     </mat-menu>
   </mat-toolbar-row>

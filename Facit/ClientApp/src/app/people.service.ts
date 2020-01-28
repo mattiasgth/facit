@@ -17,4 +17,8 @@ export class PeopleService {
     public getPersonById(id: number): Observable<Person> {
         return this.client.get<Person>('api/people/' + id);
     }
+
+    public addPerson(model: Person): Observable<Person> {
+        return this.client.post<Person>('api/people', model);
+    }
 }

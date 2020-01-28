@@ -157,6 +157,29 @@ namespace Facit.Migrations
                     b.ToTable("TransactionItem");
                 });
 
+            modelBuilder.Entity("Facit.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Password");
+
+                    b.Property<int?>("PersonId");
+
+                    b.Property<int>("Role");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("Facit.Models.Project", b =>
                 {
                     b.HasOne("Facit.Models.Currency", "BaseCurrency")
@@ -203,6 +226,13 @@ namespace Facit.Migrations
                     b.HasOne("Facit.Models.Person", "Who")
                         .WithMany()
                         .HasForeignKey("WhoId");
+                });
+
+            modelBuilder.Entity("Facit.Models.User", b =>
+                {
+                    b.HasOne("Facit.Models.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
                 });
 #pragma warning restore 612, 618
         }

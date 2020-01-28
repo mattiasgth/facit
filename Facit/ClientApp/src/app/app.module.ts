@@ -23,7 +23,7 @@ import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProjectMembersComponent } from './project-members/project-members.component';
 import { ProjectTransactionsComponent } from './project-transactions/project-transactions.component';
 import { TransactionsComponent } from './transactions/transactions.component';
@@ -35,6 +35,13 @@ import { TransactionsAddParticipantComponent } from './transactions-add-particip
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { LoadingComponent } from './core/loading.component';
+import { LoginComponent } from './login/login.component';
+import { JwtInterceptor } from './core/jwt-interceptor';
+import { ApiErrorInterceptor } from './core/api-error-interceptor';
+import { PeopleComponent } from './people/people.component';
+import { PeopleNewComponent } from './people-new/people-new.component';
+import { UsersNewComponent } from './users-new/users-new.component';
+import { ProjectsNewComponent } from './projects-new/projects-new.component';
 
 @NgModule({ 
     declarations: [
@@ -53,7 +60,12 @@ import { LoadingComponent } from './core/loading.component';
         TransactionsAddParticipantComponent,
         TransactionDetailsComponent,
         PersonDetailsComponent,
-        LoadingComponent
+        LoadingComponent,
+        LoginComponent,
+        PeopleComponent,
+        PeopleNewComponent,
+        UsersNewComponent,
+        ProjectsNewComponent
     ],
     imports: [
         BrowserModule,
@@ -91,6 +103,8 @@ import { LoadingComponent } from './core/loading.component';
         TransactionsAddParticipantComponent
     ],
     providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ApiErrorInterceptor, multi: true },
         Title
     ],
     bootstrap: [AppComponent]

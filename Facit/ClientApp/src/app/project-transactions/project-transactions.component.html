@@ -1,7 +1,8 @@
-<mat-list role="list">
+<mat-nav-list role="list">
   <mat-list-item role="listitem" *ngFor="let item of transactions">
     <a [routerLink]="['/transaction', item.id]">
-      <mat-icon>local_grocery_store</mat-icon> <span class="truncate">{{item.when | date}} {{item.description}}</span>
+      <h4 matLine><mat-icon matListIcon>local_grocery_store</mat-icon> {{item.description}}</h4>
+      <p matLine>{{item.when | date:'d MMM'}}, omslutning {{item.total}} </p>
     </a>
   </mat-list-item>
-</mat-list>
+</mat-nav-list>

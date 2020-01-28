@@ -1,4 +1,4 @@
-<mat-list role="list">
+<mat-nav-list role="list">
   <mat-list-item role="listitem" *ngFor="let item of members">
     <a mat-line [routerLink]="['/person', item.personId]">
       <mat-icon mat-list-icon>person</mat-icon>{{item.firstName}}
@@ -8,4 +8,4 @@
     </p>
     <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
   </mat-list-item>
-</mat-list>
+</mat-nav-list>

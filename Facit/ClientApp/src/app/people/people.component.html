@@ -1,0 +1,25 @@
+<mat-card fxFlex ngClass="project-card">
+  <mat-card-title>
+    Mina kompisar
+  </mat-card-title>
+  <mat-card-content>
+    <app-loading *ngIf="loading"></app-loading>
+    <ng-template [ngIf]="!loading">
+      <mat-list role="list">
+        <mat-list-item *ngFor="let item of people">
+          <a mat-line [routerLink]="['/person', item.id]">
+            <h4 mat-line><mat-icon mat-list-icon>person</mat-icon> {{item.firstName}} {{item.lastName}}</h4>
+          </a>
+          <p mat-line>
+            {{item.email1}}<br />
+            {{item.phone1}}
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="onBackClick()"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-raised-button (click)="onNewPersonClick()">Ny kompis</button>
+  </mat-card-actions>
+</mat-card>

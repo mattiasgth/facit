@@ -34,11 +34,15 @@
     <None Remove="ClientApp\src\models\balance.ts" />
     <None Remove="ClientApp\src\models\currency.ts" />
     <None Remove="ClientApp\src\models\person.ts" />
+    <None Remove="ClientApp\src\models\project-list-dto.ts" />
+    <None Remove="ClientApp\src\models\project-new.ts" />
     <None Remove="ClientApp\src\models\project.ts" />
+    <None Remove="ClientApp\src\models\role.ts" />
     <None Remove="ClientApp\src\models\transaction-new.ts" />
     <None Remove="ClientApp\src\models\transaction.ts" />
     <None Remove="ClientApp\src\models\transactionItem-new.ts" />
     <None Remove="ClientApp\src\models\transactionItem.ts" />
+    <None Remove="ClientApp\src\models\user.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,14 +52,18 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\models\balance.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\currency.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\project-list-dto.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\project-new.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\project.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\models\person.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\role.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\transaction-new.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\transaction.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\transactionItem-new.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\transactionItem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\user.ts" />
   </ItemGroup>
 
   <ItemGroup>

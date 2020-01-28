@@ -3,7 +3,7 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>
-          <h1>Ny transaktion</h1>
+          <h1>Ny händelse</h1>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -14,7 +14,7 @@
                 <ul>
                   <li>
                     <div fxLayout="column">
-                      <div class="form-inline">
+                      <div>
                         <mat-form-field>
                           <input matInput formControlName="description" placeholder="Beskrivning">
                         </mat-form-field>
@@ -24,7 +24,7 @@
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                       </div>
-                      <div class="form-inline">
+                      <div>
                         <mat-form-field>
                           <input readonly="readonly" matInput value="{{subTotal}}" placeholder="Belopp">
                         </mat-form-field>

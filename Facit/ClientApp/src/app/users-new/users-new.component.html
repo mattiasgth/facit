@@ -1,0 +1,27 @@
+<mat-card>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>Skapa nytt konto</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column">
+        <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+          <mat-form-field fxFlex>
+            <input matInput formControlName="username" placeholder="Användarnamn">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput formControlName="email" placeholder="E-postadress">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput formControlName="password" placeholder="Lösenord">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit" [disabled]="!userForm.valid"><mat-icon>save</mat-icon></button>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -19,7 +19,6 @@ export class TransactionsListComponent implements OnInit {
         this.service.getTransactionsByProjectId(this.projectId)
             .subscribe((rslt:Transaction[]) => {
                 this.transactions = rslt;
-                console.log(this.transactions);
             });
     }
 

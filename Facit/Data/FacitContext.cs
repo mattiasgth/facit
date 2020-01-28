@@ -24,5 +24,6 @@ namespace Facit.Models
 
         public DbSet<Facit.Models.Project> Project { get; set; }
         public DbSet<Facit.Models.ProjectMembership> ProjectMembership { get; set; }
+        public DbSet<Facit.Models.User> User { get; set; }
     }
 }

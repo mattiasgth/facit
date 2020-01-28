@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from '../projects.service';
 import { TransactionsAddParticipantComponent } from '../transactions-add-participant/transactions-add-participant.component';
 import { MatDialog } from '@angular/material';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
     selector: 'app-transactions-new',
@@ -29,6 +30,7 @@ export class TransactionsNewComponent implements OnInit {
         private route: ActivatedRoute,
         private service: TransactionsService,
         private projectService: ProjectsService,
+        private authService: AuthService,
         private formBuilder: FormBuilder,
         public dialog: MatDialog) { }
 
@@ -40,13 +42,14 @@ export class TransactionsNewComponent implements OnInit {
     }
 
     loadByProject(projectId: number) {
+        let personId = this.authService.currentUserValue.person.id;
         this.service.getCurrencies()
             .subscribe(rslt => this.currencies = rslt);
         this.transactionForm = this.formBuilder.group({
             description: new FormControl(),
             when: new FormControl(new Date()),
             projectId: new FormControl(projectId),
-            createdById: new FormControl(1),
+            createdById: new FormControl(personId),
             currencyLocalId: new FormControl(1),
             totalAmount: new FormControl(0.0),
             participants: this.formBuilder.array([])
@@ -96,6 +99,7 @@ export class TransactionsNewComponent implements OnInit {
             if (result) {
                 this.peopleService.getPersonById(+result)
                     .subscribe(person => {
+                        person.id = result;
                         this.participants = this.transactionForm.get('participants') as FormArray;
                         this.participants.push(this.createParticipant(person));
                     });

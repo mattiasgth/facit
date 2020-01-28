@@ -61,7 +61,9 @@ namespace Facit.Controllers
                     {
                         Description = x.Description,
                         Id = x.Id,
-                        When = x.When
+                        When = x.When,
+                        Total = transactionItems.Where(y => y.Amount > 0 && y.Transaction.Id == x.Id)
+                            .Sum(ti => ti.Amount)
                     });
 
                 p.Members = transactionItems

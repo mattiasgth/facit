@@ -8,17 +8,6 @@
   flex-direction: row;
 }
 
-.form-inline {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-  .form-inline .mat-form-field {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
 .form-inline .mat-form-field:nth-child(1) {
   margin-right: 10px;
 }
@@ -34,7 +23,7 @@
 }
 
 .halfway{
-  min-width: 33%;
+  /* min-width: 33%; */
 }
 
 .transactions-new-wrapper {

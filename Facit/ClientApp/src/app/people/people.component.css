@@ -1,0 +1,17 @@
+a,
+a:visited,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+  a:hover {
+    color: #125699;
+  }
+:host {
+  width: 100%;
+}
+
+.mat-list-item {
+  height: auto !important;
+}
